@@ -94,12 +94,12 @@ def get_weather(city, api_key):
         print("City Not Found!")
         speak("City Not Found")
 api_key = os.getenv('W_key')
-# api_key = "89c33d140e50f4cb3db591cb528b9094"
+
 
 def ai(query):
     
 
-    # genai.configure(api_key="AIzaSyDbYFrawCr3lA-Nn2ubnf6sRi77HdJS4CM")
+    
     genai.configure(api_key=os.getenv('ai_key'))
 
     generation_cofig = {"temperature": 0.9, "top_p":1, "top_k":1, "max_output_tokens": 2048}
