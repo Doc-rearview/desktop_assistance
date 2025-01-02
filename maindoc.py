@@ -14,6 +14,11 @@ import cv2
 import random
 import operator
 import sys
+from dotenv import load_dotenv
+
+
+
+
 
 engine = pyttsx3.init('sapi5')
 voice = engine.getProperty('voices')
@@ -59,6 +64,10 @@ def wish_me():
         speak("good evening master!")
     speak("ready to serve. how can i serve you?")
 
+
+def conf():
+    load_dotenv()
+
 def get_weather(city, api_key):
     # Base URL for the OpenWeather API
     base_url = "https://api.openweathermap.org/data/2.5/weather?"
@@ -84,14 +93,14 @@ def get_weather(city, api_key):
     else:
         print("City Not Found!")
         speak("City Not Found")
-
-api_key = "89c33d140e50f4cb3db591cb528b9094"
+api_key = os.getenv('W_key')
+# api_key = "89c33d140e50f4cb3db591cb528b9094"
 
 def ai(query):
     
 
-    genai.configure(api_key="AIzaSyDbYFrawCr3lA-Nn2ubnf6sRi77HdJS4CM")
-
+    # genai.configure(api_key="AIzaSyDbYFrawCr3lA-Nn2ubnf6sRi77HdJS4CM")
+    genai.configure(api_key=os.getenv('ai_key'))
 
     generation_cofig = {"temperature": 0.9, "top_p":1, "top_k":1, "max_output_tokens": 2048}
 
@@ -115,6 +124,7 @@ def cls():
 
 if __name__=="__main__":
     wish_me()
+    conf()
     while True:
         # speak("hello sir, how can i help you")
         txt=takecommand().lower()
@@ -211,7 +221,7 @@ if __name__=="__main__":
             print("what else can i do for you master")
             txt=takecommand()
 
-        elif " temperature today".lower() in txt.lower():
+        elif "temperature today".lower() in txt.lower():
             speak("please tell the name of city for weather forcast")
             city =takecommand()
             
@@ -220,7 +230,7 @@ if __name__=="__main__":
             print("what else can i do for you master")
             txt=takecommand()
 
-        elif "today' temperature".lower() in txt.lower():
+        elif "today's temperature".lower() in txt.lower():
             speak("please tell the name of city for weather forcast")
             city =takecommand()
             
